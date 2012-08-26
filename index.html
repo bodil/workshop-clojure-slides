@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
 
-    <title>Clojure Workshop</title>
+    <title>clojure workshop 4 u</title>
 
     <meta name="description" content="Learn Clojure etc">
     <meta name="author" content="Bodil Stokke">
@@ -39,15 +39,66 @@
       <!-- Any section element inside of this container is displayed as a slide -->
       <div class="slides">
         <section>
-          <h1>HELLO</h1>
-          <h3>u so noob</h3>
+          <h1>Hello muggles</h1>
+        </section>
+
+        <section data-markdown>
+Scala is dumb
+-------------
+
+```scala
+// I can only do dumb
+def fib(n: Int): Int = n match {
+  case 0 | 1 => n
+  case _ => fib(n - 1) + fib(n - 2)
+}
+```
+        </section>
+
+        <section data-markdown>
+Clojure is smart
+----------------
+
+```clj
+;; Pretty dumb
+(defn fib [n]
+  (if (< n 2) n
+    (+ (fib (- n 1)) (fib (- n 2))))))
+;; Make it smart
+(def fib (memoize fib))
+```
+        </section>
+
+        <section data-markdown>
+Haskell is smarterest
+---------------------
+
+```hs
+-- Looks dumb but is smarter than you
+fib 0 = 0
+fib 1 = 1
+fib n = fib (n-2) + fib (n-1)
+```
+        </section>
+
+        <section data-markdown>
+Fucking monads
+--------------
+
+```hs
+-- How do they work?
+import Control.Monad.State
+fib n = flip evalState (0,1) $ do
+  forM [0..(n-1)] $ \_ -> do
+    (a,b) <- get
+    put (b,a+b)
+  (a,b) <- get
+  return a
+```
         </section>
 
         <section>
-          <h2>Clojure is teh Pwnz</h2>
-          <p>
-            So it is.
-          </p>
+          <h3>kthxbye</h3>
         </section>
 
       </div>
