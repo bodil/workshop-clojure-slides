@@ -237,27 +237,14 @@ Maps
 ```
         </section>
         <section data-markdown>
-Merging maps
-------------
+Frequencies
+-----------
 ```clj
-(def mario-map {:name "Mario", :occupation "Plumber"})
-(def luigi-map {:name "Luigi", :occupation "Plumber"})
+(frequencies ["Mario" "Mario" "Luigi" "Mario"])
+; => {"Mario" 3, "Luigi" 1}
 
-(merge-with str mario-map luigi-map)
-; => {:name "MarioLuigi",
-;     :occupation "PlumberPlumber"}
-```
-        </section>
-        <section data-markdown>
-Dice map
---------
-```clj
-(with-test
-  (defn dice-map [dice]
-    (reduce (fn [a b] (merge-with + a b))
-      (map (fn [x] {x 1}) dice)))
-
-  (is (= {5 1, 4 2, 3 1, 6 1} (dice-map [5 4 3 4 6]))))
+(frequencies [5 4 3 4 6])
+; => {3 1, 4 2, 5 1, 6 1}
 ```
         </section>
         <section data-markdown>
