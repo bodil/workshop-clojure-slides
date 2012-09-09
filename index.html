@@ -37,65 +37,184 @@
       <!-- Any section element inside of this container is displayed as a slide -->
       <div class="slides">
         <section>
-          <h1>Hello muggles</h1>
+          <h1>Clojure crash course</h1>
         </section>
 
         <section data-markdown>
-Scala is dumb
--------------
-
-```scala
-// I can only do dumb
-def fib(n: Int): Int = n match {
-  case 0 | 1 => n
-  case _ => fib(n - 1) + fib(n - 2)
-}
-```
-        </section>
-
-        <section data-markdown>
-Clojure is smart
-----------------
-
+Hello world
+----------
 ```clj
-;; Pretty dumb
-(defn fib [n]
-  (if (< n 2) n
-    (+ (fib (- n 1)) (fib (- n 2))))))
-;; Make it smart
-(def fib (memoize fib))
+(println "Hello World!");
+```
+        </section>
+        <section data-markdown>
+Lists
+-----
+```clj
+(println "Hello World!")
+(1 2 3 "Hello" :world)
+```
+        </section>
+        <section data-markdown>
+Vectors
+-------
+```clj
+["This" :is "a vector" 1 2 3]
+```
+        </section>
+        <section data-markdown>
+Conditions
+----------
+```clj
+(defn number-as-text [number]
+(cond (= number 1) "One"
+      (= number 2) "Two"
+      :else        "Many")
+)
+```
+        </section>
+        <section data-markdown>
+Your first task
+---------------
+<ul data-build>
+<li>1</li>
+<li>2</li>
+<li>Fizz</li>
+<li>4</li>
+<li>Buzz</li>
+<li>Fizz</li>
+<li>...</li>
+<li>14</li>
+<li>FizzBuzz</li>
+</ul>
+        </section>
+<section data-markdown>
+Remember
+-------
+```clj
+(defn number-as-text [number]
+(cond (= number 1) "One"
+      (= number 2) "Two"
+      :else        "Many")
+)
+```
+Hint: (rem 7 3)
+        </section>
+        <section data-markdown>
+Unit tests
+----------
+```clj
+(with-test
+(defn fizz-buzz [x]
+(cond (= (rem x 15) 0) "FizzBuzz"
+      (= (rem x 5) 0)  "Buzz"
+      (= (rem x 3) 0)  "Fizz"
+      :else            x)
+)
+(is (= 1 (fizz-buzz 1)))
+(is (= 2 (fizz-buzz 2)))
+(is (= "Fizz" (fizz-buzz 3)))
+(is (= "Buzz" (fizz-buzz 5)))
 ```
         </section>
 
         <section data-markdown>
-Haskell is smarterest
----------------------
-
-```hs
--- Looks dumb but is smarter than you
-fib 0 = 0
-fib 1 = 1
-fib n = fib (n-2) + fib (n-1)
+Maps and anonymous functions
+----------------------------
+```clj
+(with-test
+(defn add-x [numbers x]q
+  (map (fn [number] (+ number x)) numbers)
+)
+(is (= [3 4 5 6] (add-x [1 2 3 4] 2)))
 ```
         </section>
-
         <section data-markdown>
-Fucking monads
+Filters
+-------
+```clj
+(with-test
+(defn greater-than [numbers x]
+   (filter (fn [number] (> number x) numbers))
+(is (= [3 4] (greater-than [1 2 3 4] 2)))
+```
+        </section>
+        <section data-markdown>
+Reduce
+------
+```clj
+(reduce + [1 2 3 4])
+>10
+
+(reduce * [1 2 3 4])
+>24
+```
+        </section>
+        <section data-markdown>
+Yahtzee scores
 --------------
-
-```hs
--- How do they work?
-import Control.Monad.State
-fib n = flip evalState (0,1) $ do
-  forM [0..(n-1)] $ \_ -> do
-    (a,b) <- get
-    put (b,a+b)
-  (a,b) <- get
-  return a
+```clj
+(ones [1 1 4 5 6])
+>2
+(twoes [2 2 4 6 2])
+>6
+(chance [2 2 4 5 4])
+>17
 ```
         </section>
 
-        <section>
+        <section data-markdown>
+Remember
+--------
+```clj
+(with-test
+(defn greater-than [numbers x]
+   (filter (fn [number] (> number x) numbers))
+(is (= [3 4] (greater-than [1 2 3 4] 2)))
+```
+Hint: Use reduce to add numbers
+        </section>
+        <section data-markdown>
+Dice map
+--------
+```clj
+(with-test
+  (defn dice-map [dices]
+  (reduce (partial merge-with +) (map #(hash-map % 1) dices))
+  )
+  (is (= {5 1, 4 2, 3 1, 6 1} (dice-map [5 4 3 4 6])))
+)
+```
+        </section>
+        <section data-markdown>
+Minesweeper
+-----------
+```clj
+(with-test
+(defn sweeper [board]
+  ....
+)
+(is (= [[:b 1 0] [1 2 1] [0 1 :b]] (sweeper [[:b 0 0] [0 0 0] [0 0 :b]])))
+)
+```
+        </section>
+                <section data-markdown>
+Strategy
+--------
+```clj
+(with-test (defn mine? [board pos] ...)
+  (is (= true (mine? [[:b 1 0] [1 2 1] [0 1 :b]] [2 2])))
+  (is (= false (mine? [[:b 1 0] [1 2 1] [0 1 :b]] [1 1])))
+  (is (= false (mine? [[:b 1 0] [1 2 1] [0 1 :b]] [-1 0])))
+)
+
+(with-test (defn neighbours [pos] ...)
+  (is (= [[0 -1] [0 0] [0 1] [1 -1] [1 1] [2 -1] [2 0] [2 1]] (neighbours [0 1])))
+)
+```
+        </section>
+
+        <section data-markdown>
           <h3>kthxbye</h3>
         </section>
 
