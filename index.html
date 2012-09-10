@@ -226,11 +226,11 @@ Yahtzee scores
 Remember
 --------
 ```clj
-(with-test
-  (defn greater-than [numbers x]
-    (filter (fn [number] (> number x)) numbers))
+(defn greater-than [numbers x]
+  (filter (fn [number] (> number x)) numbers))
 
-  (is (= [3 4] (greater-than [1 2 3 4] 2))))
+(greater-than [1 2 3 4] 2)
+; => (3 4)
 ```
 Hint: Use reduce to add numbers
         </section>
@@ -286,6 +286,17 @@ And One More Thing
 ; => 3
 ```
         </section>
+		<section data-markdown>
+Remember
+--------
+```clj
+(defn greater-than [numbers x]
+  (filter (fn [number] (> number x)) numbers))
+
+(frequencies ["Mario" "Mario" "Luigi" "Mario"])
+; => {"Mario" 3, "Luigi" 1}
+```			
+	    </section>
         <section data-markdown>
 Minesweeper
 -----------
