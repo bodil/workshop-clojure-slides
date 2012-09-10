@@ -170,7 +170,7 @@ Filter
 ```clj
 (with-test
   (defn greater-than [numbers x]
-    (filter (fn [number] (> number x) numbers)))
+    (filter (fn [number] (> number x)) numbers))
 
   (is (= [3 4] (greater-than [1 2 3 4] 2))))
 ```
