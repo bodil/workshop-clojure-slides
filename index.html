@@ -250,7 +250,8 @@ Maps
 Maps
 ----
 ```clj
-(def mario-map {:name "Mario", :occupation "Plumber"})
+(def mario-map {:name "Mario",
+                :occupation "Plumber"})
 
 (mario-map :name)
 ; => "Mario"
@@ -268,6 +269,21 @@ Frequencies
 
 (frequencies [5 4 3 4 6])
 ; => {3 1, 4 2, 5 1, 6 1}
+```
+        </section>
+        <section data-markdown>
+And One More Thing
+------------------
+```clj
+(def names ["Mario" "Luigi" "Bowser"])
+
+; look up an index on a vector
+(names 1)
+; => "Luigi"
+
+; length of a vector
+(count names)
+; => 3
 ```
         </section>
         <section data-markdown>
